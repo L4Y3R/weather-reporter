@@ -2,6 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { WeatherData } from "./lib/fetchWeather";
+import { Eye, Droplets, Wind, Sun } from "lucide-react"
+import CurrentWeather from "./components/CurrentWeather";
+import WeatherMetric from "./components/WeatherMetric";
+import AdditionalDetail from "./components/AdditonalDetails";
+import Forecast from "./components/Forecast";
+import HeaderSearch from "./components/search"
 
 export function WeatherClient() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -44,8 +50,8 @@ export function WeatherClient() {
   }
 
   return (
-  <main className="min-h-screen flex items-center justify-center">
-      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6 w-full max-w-sm">
+  <main className="min-h-screen bg-black">
+      {/* <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6 w-full max-w-sm">
         <div> {weather.city}, {weather.country} </div>
           <div className="space-y-2 text-lg">
             <div>🌡️ Temperature: {weather.temperatureC}°C</div>
@@ -64,6 +70,28 @@ export function WeatherClient() {
               />
             </div>
         </div>
+      </div> */}
+      <div className="w-full max-w-none mx-auto px-36 py-8">
+        <div className="py-8">
+            <HeaderSearch/>
+        </div>
+
+        <CurrentWeather />
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <WeatherMetric icon={Eye} iconColor="text-blue-400" iconBg="bg-blue-500/20" label="VISIBILITY" value="10 mi" />
+          <WeatherMetric icon={Droplets} iconColor="text-cyan-400" iconBg="bg-cyan-500/20" label="HUMIDITY" value="65%" />
+          <WeatherMetric icon={Wind} iconColor="text-gray-400" iconBg="bg-gray-500/20" label="WIND" value="12 mph" />
+          <WeatherMetric icon={Sun} iconColor="text-orange-400" iconBg="bg-orange-500/20" label="UV INDEX" value="6" />
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <AdditionalDetail label="FEELS LIKE" value="75°" />
+          <AdditionalDetail label="WIND CHILL" value="68°" />
+          <AdditionalDetail label="PRESSURE" value="30.15" subValue="in Hg" />
+          <AdditionalDetail label="DEW POINT" value="58°" />
+        </div>
+        <Forecast />
       </div>
     </main>
   );
