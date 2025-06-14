@@ -8,7 +8,11 @@ type Props = {
 
 export default function CurrentWeather({ weather }: Props) {
     return (
-    <Card className="bg-gray-900/40 backdrop-blur-xl border-gray-800 rounded-3xl overflow-hidden mb-8">
+    <Card className="
+        bg-gray-900/40 backdrop-blur-xl border-gray-800 rounded-3xl overflow-hidden mb-8
+        transition-transform duration-300 ease-in-out
+        hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50
+        cursor-pointer">
       <CardContent className="p-8">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
