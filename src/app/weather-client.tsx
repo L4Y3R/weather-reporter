@@ -8,6 +8,7 @@ import WeatherMetric from "./components/WeatherMetric";
 import AdditionalDetail from "./components/AdditonalDetails";
 import Forecast from "./components/Forecast";
 import HeaderSearch from "./components/search"
+import LoadingScreen from "./components/LoadingScreen";
 
 export function WeatherClient() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -36,9 +37,7 @@ export function WeatherClient() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-xl">
-        🔄 Loading weather...
-      </div>
+      <LoadingScreen label="Weather"/>
     );
   }
 
