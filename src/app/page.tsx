@@ -1,5 +1,6 @@
+
+import { WeatherClient } from "./weather-client";
+
 export default function Home() {
-  return (
-    <div> Hello </div>
-  );
+  return <WeatherClient/>
 }

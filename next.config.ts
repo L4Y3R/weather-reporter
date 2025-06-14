@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
         crypto: false,
         stream: false,
         buffer: false,
+        v8: false,
+        net: false,
+        tls: false,
       };
     }
     return config;
