@@ -7,8 +7,9 @@ import CurrentWeather from "./components/CurrentWeather";
 import WeatherMetric from "./components/WeatherMetric";
 import AdditionalDetail from "./components/AdditonalDetails";
 import Forecast from "./components/Forecast";
-import HeaderSearch from "./components/search"
+import HeaderSearch from "./components/Search";
 import LoadingScreen from "./components/LoadingScreen";
+import ErrorScreen from "./components/ErrorScreen";
 
 export function WeatherClient() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -43,34 +44,12 @@ export function WeatherClient() {
 
   if (error || !weather) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-red-600 text-lg">
-        ❌ Failed to load weather data.
-      </div>
+      <ErrorScreen/>
     );
   }
 
   return (
   <main className="min-h-screen bg-black">
-      {/* <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6 w-full max-w-sm">
-        <div> {weather.city}, {weather.country} </div>
-          <div className="space-y-2 text-lg">
-            <div>🌡️ Temperature: {weather.temperatureC}°C</div>
-            <div> Feels Like: {weather.feelsLikeC} </div>
-            <div> Wind Chill: {weather.windChill} </div>
-            <div> Visibility: {weather.visibility} </div>
-            <div>💧 Humidity: {weather.humidity}%</div>
-            <div>💨 Wind Speed: {weather.windKph} kph</div>
-            <div>🌞 UV Index: {weather.uvIndex}</div>
-            <div>
-              🌦️ {weather.conditionText}
-              <img
-                src={weather.iconUrl}
-                alt="Weather Icon"
-                className="inline ml-2 h-6 w-6 align-middle"
-              />
-            </div>
-        </div>
-      </div> */}
       <div className="w-full max-w-none mx-auto px-52 py-8">
         <div className="py-8">
             <HeaderSearch/>
