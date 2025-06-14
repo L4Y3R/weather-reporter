@@ -21,6 +21,7 @@ export function WeatherClient() {
         if (!res.ok) throw new Error("Failed to fetch weather");
 
         const data: WeatherData = await res.json();
+        console.log("weather in component:", data);
         setWeather(data);
       } catch (e) {
         console.error(e);
@@ -86,10 +87,10 @@ export function WeatherClient() {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <AdditionalDetail label="FEELS LIKE" value="75°" />
-          <AdditionalDetail label="WIND CHILL" value="68°" />
-          <AdditionalDetail label="PRESSURE" value="30.15" subValue="in Hg" />
-          <AdditionalDetail label="DEW POINT" value="58°" />
+          <AdditionalDetail label="FEELS LIKE" value={`${weather.feelsLikeC} °C`} />
+          <AdditionalDetail label="WIND CHILL" value={`${weather.windChill} °C`} />
+          <AdditionalDetail label="PRESSURE" value={weather.heatIndex} subValue="in Hg" />
+          <AdditionalDetail label="DEW POINT" value={weather.dewPointC} />
         </div>
         <Forecast />
       </div>

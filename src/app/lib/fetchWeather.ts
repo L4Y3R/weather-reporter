@@ -1,3 +1,4 @@
+
 export interface WeatherData {
   temperatureC: number;
   localtime: string;
@@ -11,6 +12,9 @@ export interface WeatherData {
   iconUrl: string;
   city: string;
   country: string;
+  pressure: number;
+  dewPointC: number,
+  heatIndex: number
 }
 
 export async function fetchWeather(city: string): Promise<WeatherData | null> {
@@ -42,7 +46,10 @@ export async function fetchWeather(city: string): Promise<WeatherData | null> {
       conditionText: data.current.condition.text,
       iconUrl: `https:${data.current.condition.icon}`,
       city: data.location.name,
-      country: data.location.country
+      country: data.location.country,
+      pressure: data.current.pressure_in,
+      dewPointC: data.current.dewpoint_c,
+      heatIndex: data.current.heatindex_c
     };
   } catch (error) {
     console.error("Error fetching weather data:", error);
