@@ -12,6 +12,7 @@ import LoadingScreen from "./components/LoadingScreen";
 import ErrorScreen from "./components/ErrorScreen";
 
 export function WeatherClient() {
+  const [city, setCity] = useState("Colombo");
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -19,7 +20,7 @@ export function WeatherClient() {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const res = await fetch("/api/weather");
+        const res = await fetch(`/api/weather?city=${city}`);
         if (!res.ok) throw new Error("Failed to fetch weather");
 
         const data: WeatherData = await res.json();
@@ -34,7 +35,7 @@ export function WeatherClient() {
     };
 
     fetchWeather();
-  }, []);
+  }, [city]);
 
   if (loading) {
     return (
@@ -52,7 +53,7 @@ export function WeatherClient() {
   <main className="min-h-screen bg-black">
       <div className="w-full max-w-none mx-auto px-52 py-8">
         <div className="py-8">
-            <HeaderSearch/>
+            <HeaderSearch onSearch={(value) => setCity(value)}/>
         </div>
 
         <CurrentWeather weather={weather}/>

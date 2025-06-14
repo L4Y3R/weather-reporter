@@ -1,8 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { fetchWeather } from "@/app/lib/fetchWeather";
 
-export async function GET() {
-  const data = await fetchWeather("Colombo");
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const city = searchParams.get("city") || "Colombo";
+
+  const data = await fetchWeather(city);
 
   if (!data) {
     return NextResponse.json({ error: "Failed to fetch weather" }, { status: 500 });
