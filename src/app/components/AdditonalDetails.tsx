@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card"
 
 interface AdditionalDetailProps {
   label: string
-  value: string
+  value: any
   subValue?: string
 }
 

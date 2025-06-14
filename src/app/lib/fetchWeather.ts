@@ -10,7 +10,7 @@ export interface WeatherData {
   conditionText: string;
   iconUrl: string;
   city: string;
-  country: string
+  country: string;
 }
 
 export async function fetchWeather(city: string): Promise<WeatherData | null> {

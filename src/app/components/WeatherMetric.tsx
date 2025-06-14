@@ -6,7 +6,7 @@ interface WeatherMetricProps {
   iconColor: string
   iconBg: string
   label: string
-  value: string
+  value: any
 }
 
 export default function WeatherMetric({ icon: Icon, iconColor, iconBg, label, value }: WeatherMetricProps) {

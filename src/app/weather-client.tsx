@@ -79,10 +79,10 @@ export function WeatherClient() {
         <CurrentWeather weather={weather}/>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <WeatherMetric icon={Eye} iconColor="text-blue-400" iconBg="bg-blue-500/20" label="VISIBILITY" value="10 mi" />
-          <WeatherMetric icon={Droplets} iconColor="text-cyan-400" iconBg="bg-cyan-500/20" label="HUMIDITY" value="65%" />
-          <WeatherMetric icon={Wind} iconColor="text-gray-400" iconBg="bg-gray-500/20" label="WIND" value="12 mph" />
-          <WeatherMetric icon={Sun} iconColor="text-orange-400" iconBg="bg-orange-500/20" label="UV INDEX" value="6" />
+          <WeatherMetric icon={Eye} iconColor="text-blue-400" iconBg="bg-blue-500/20" label="VISIBILITY" value={`${weather.visibility} KM`} />
+          <WeatherMetric icon={Droplets} iconColor="text-cyan-400" iconBg="bg-cyan-500/20" label="HUMIDITY" value={`${weather.humidity} %`}  />
+          <WeatherMetric icon={Wind} iconColor="text-gray-400" iconBg="bg-gray-500/20" label="WIND" value={`${weather.windKph} KM/h`}  />
+          <WeatherMetric icon={Sun} iconColor="text-orange-400" iconBg="bg-orange-500/20" label="UV INDEX" value={weather.uvIndex} />
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
