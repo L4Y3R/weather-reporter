@@ -1,5 +1,6 @@
 export interface WeatherData {
   temperatureC: number;
+  localtime: string;
   feelsLikeC: number;
   windChill: number;
   visibility: number
@@ -31,6 +32,7 @@ export async function fetchWeather(city: string): Promise<WeatherData | null> {
 
     return {
       temperatureC: data.current.temp_c,
+      localtime: data.location.localtime,
       feelsLikeC: data.current.feelslike_c,
       windChill: data.current.windchill_c,
       visibility: data.current.vis_km,

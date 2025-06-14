@@ -71,12 +71,12 @@ export function WeatherClient() {
             </div>
         </div>
       </div> */}
-      <div className="w-full max-w-none mx-auto px-36 py-8">
+      <div className="w-full max-w-none mx-auto px-52 py-8">
         <div className="py-8">
             <HeaderSearch/>
         </div>
 
-        <CurrentWeather />
+        <CurrentWeather weather={weather}/>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <WeatherMetric icon={Eye} iconColor="text-blue-400" iconBg="bg-blue-500/20" label="VISIBILITY" value="10 mi" />

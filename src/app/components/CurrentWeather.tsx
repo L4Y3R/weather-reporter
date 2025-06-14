@@ -1,31 +1,40 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { MapPin, Sun } from "lucide-react"
+import { WeatherData } from "../lib/fetchWeather";
 
-export default function CurrentWeather() {
+type Props = {
+  weather: WeatherData;
+};
+
+export default function CurrentWeather({ weather }: Props) {
     return (
     <Card className="bg-gray-900/40 backdrop-blur-xl border-gray-800 rounded-3xl overflow-hidden mb-8">
       <CardContent className="p-8">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <MapPin className="w-5 h-5 text-gray-400" />
-            <span className="text-xl font-medium text-white">New York</span>
+            <span className="text-xl font-medium text-white">{weather.city} , {weather.country}</span>
           </div>
-          <span className="text-gray-400">2:30 PM</span>
+          <span className="text-gray-400"> 
+            {new Date(weather.localtime.replace(" ", "T")).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+            })}
+          </span>
         </div>
 
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-8xl font-thin text-white mb-2 tracking-tighter">72°</div>
-            <div className="text-2xl text-gray-300 mb-2 font-medium">Partly Cloudy</div>
-            <div className="text-gray-400">Feels like 75°</div>
+            <div className="text-8xl font-thin text-white mb-2 tracking-tighter"> {weather.temperatureC}°C </div>
+            <div className="text-2xl text-gray-300 mb-2 font-medium"> {weather.conditionText} </div>
+            <div className="text-gray-400">Feels like {weather.feelsLikeC} °C</div>
           </div>
-          <div className="text-right">
-            <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full p-6 mb-4">
-              <Sun className="w-16 h-16 text-white" />
-            </div>
-            <div className="text-gray-400 space-y-1">
-              <div>H: 78° L: 65°</div>
-            </div>
+          <div className="flex justify-end mb-6">
+            <img
+              src={weather.iconUrl.startsWith("//") ? `https:${weather.iconUrl}` : weather.iconUrl}
+              alt="Weather Icon"
+              className="h-32 w-32 object-contain"
+            />
           </div>
         </div>
       </CardContent>
