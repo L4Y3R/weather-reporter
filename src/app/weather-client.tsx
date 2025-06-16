@@ -51,7 +51,7 @@ export function WeatherClient() {
 
   return (
   <main className="min-h-screen bg-black">
-      <div className="w-full max-w-none mx-auto px-52 py-8">
+      <div className="w-full mx-auto px-4 sm:px-8 md:px-12 lg:px-20 xl:px-32 2xl:px-52 py-8">
         <div className="py-8">
             <HeaderSearch onSearch={(value) => setCity(value)}/>
         </div>
@@ -73,6 +73,6 @@ export function WeatherClient() {
         </div>
         <Forecast forecast={weather.forecast}/>
       </div>
-    </main>
+  </main>
   );
 }

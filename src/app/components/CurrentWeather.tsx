@@ -29,7 +29,7 @@ export default function CurrentWeather({ weather }: Props) {
 
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-8xl font-thin text-white mb-2 tracking-tighter"> {weather.temperatureC}°C </div>
+            <div className="text-6xl sm:text-6xl md:text-7xl lg:text-8xl font-thin text-white mb-2 tracking-tighter"> {weather.temperatureC}°C </div>
             <div className="text-2xl text-gray-300 mb-2 font-medium"> {weather.conditionText} </div>
             <div className="text-gray-400">Feels like {weather.feelsLikeC} °C</div>
           </div>
