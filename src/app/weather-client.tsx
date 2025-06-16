@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { WeatherData } from "./lib/fetchWeather";
+import { WeatherData } from "./types/weather";
 import { Eye, Droplets, Wind, Sun } from "lucide-react"
 import CurrentWeather from "./components/CurrentWeather";
 import WeatherMetric from "./components/WeatherMetric";
 import AdditionalDetail from "./components/AdditonalDetails";
 import Forecast from "./components/Forecast";
-import HeaderSearch from "./components/Search";
+import HeaderSearch from "./components/HeaderSearch";
 import LoadingScreen from "./components/LoadingScreen";
 import ErrorScreen from "./components/ErrorScreen";
 
@@ -24,7 +24,7 @@ export function WeatherClient() {
         if (!res.ok) throw new Error("Failed to fetch weather");
 
         const data: WeatherData = await res.json();
-        console.log("weather in component:", data);
+        console.log(" Data: ", data.forecast);
         setWeather(data);
       } catch (e) {
         console.error(e);
@@ -39,7 +39,7 @@ export function WeatherClient() {
 
   if (loading) {
     return (
-      <LoadingScreen label="Weather"/>
+      <LoadingScreen/>
     );
   }
 
@@ -71,7 +71,7 @@ export function WeatherClient() {
           <AdditionalDetail label="PRESSURE" value={weather.heatIndex} subValue="in Hg" />
           <AdditionalDetail label="DEW POINT" value={weather.dewPointC} />
         </div>
-        <Forecast />
+        <Forecast forecast={weather.forecast}/>
       </div>
     </main>
   );

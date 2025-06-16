@@ -3,11 +3,7 @@
 import { Cloud } from "lucide-react"
 import { useEffect, useState } from "react"
 
-interface LoadingScreenProps {
-  label: string
-}
-
-export default function LoadingScreen({ label }: LoadingScreenProps) {
+export default function LoadingScreen() {
     const [dots, setDots] = useState("")
 
     useEffect(() => {
@@ -24,18 +20,16 @@ export default function LoadingScreen({ label }: LoadingScreenProps) {
       return (
         <div className="fixed inset-0 bg-gray-950 flex items-center justify-center">
         <div className="text-center space-y-8">
-            {/* Weather icon */}
+
             <div className="flex justify-center">
             <Cloud size={64} className="text-white animate-pulse" />
             </div>
 
-            {/* Loading text */}
             <div className="space-y-2">
-            {label && <p className="text-white text-lg font-medium">Weather</p>}
+            <p className="text-white text-lg font-medium">Weather</p>
             <p className="text-gray-400 text-sm min-h-[20px]">Loading{dots}</p>
             </div>
 
-            {/* Simple progress indicator */}
             <div className="w-32 mx-auto">
             <div className="h-0.5 bg-gray-800 rounded-full overflow-hidden">
                 <div className="h-full bg-white rounded-full animate-progress"></div>

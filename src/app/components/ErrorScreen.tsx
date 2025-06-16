@@ -1,6 +1,6 @@
 "use client"
 
-import { CloudOff, RotateCcw } from "lucide-react"
+import { CloudOff } from "lucide-react"
 
 export default function ErrorScreen() {
   return (

@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { MapPin, Sun } from "lucide-react"
-import { WeatherData } from "../lib/fetchWeather";
+import { WeatherData } from "../types/weather";
 
 type Props = {
   weather: WeatherData;

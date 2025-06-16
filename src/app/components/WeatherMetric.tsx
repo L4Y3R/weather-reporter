@@ -1,13 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { LucideIcon } from "lucide-react"
-
-interface WeatherMetricProps {
-  icon: LucideIcon
-  iconColor: string
-  iconBg: string
-  label: string
-  value: any
-}
+import { WeatherMetricProps } from "../types/wetherMetricProps"
 
 export default function WeatherMetric({ icon: Icon, iconColor, iconBg, label, value }: WeatherMetricProps) {
   return (

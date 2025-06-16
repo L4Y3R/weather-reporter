@@ -1,32 +1,14 @@
-
-export interface WeatherData {
-  temperatureC: number;
-  localtime: string;
-  feelsLikeC: number;
-  windChill: number;
-  visibility: number
-  humidity: number;
-  windKph: number;
-  uvIndex: number;
-  conditionText: string;
-  iconUrl: string;
-  city: string;
-  country: string;
-  pressure: number;
-  dewPointC: number,
-  heatIndex: number
-}
+import { WeatherData } from "../types/weather";
 
 export async function fetchWeather(city: string): Promise<WeatherData | null> {
   try {
     const apiKey = process.env.WEATHER_API_KEY;
     const response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`,
+      `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3`,
       {
         next: { revalidate: 600 },
       }
     );
-
     if (!response.ok) {
       console.error("Failed to fetch weather:", response.statusText);
       return null;
@@ -49,8 +31,10 @@ export async function fetchWeather(city: string): Promise<WeatherData | null> {
       country: data.location.country,
       pressure: data.current.pressure_in,
       dewPointC: data.current.dewpoint_c,
-      heatIndex: data.current.heatindex_c
+      heatIndex: data.current.heatindex_c,
+      forecast: data.forecast.forecastday
     };
+
   } catch (error) {
     console.error("Error fetching weather data:", error);
     return null;

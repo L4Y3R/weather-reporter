@@ -1,10 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-
-interface AdditionalDetailProps {
-  label: string
-  value: any
-  subValue?: string
-}
+import { AdditionalDetailProps } from "../types/additionalDetailProps"
 
 export default function AdditionalDetail({ label, value, subValue }: AdditionalDetailProps) {
   return (
