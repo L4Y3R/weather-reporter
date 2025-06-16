@@ -5,5 +5,5 @@ export interface WeatherMetricProps {
   iconColor: string
   iconBg: string
   label: string
-  value: any
+  value: string | number
 }
