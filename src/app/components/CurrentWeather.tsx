@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { MapPin, Sun } from "lucide-react"
+import { MapPin } from "lucide-react"
 import { WeatherData } from "../types/weather";
 
 type Props = {

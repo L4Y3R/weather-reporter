@@ -1,5 +1,5 @@
 export interface AdditionalDetailProps {
   label: string
-  value: any
+  value: string | number
   subValue?: string
 }
