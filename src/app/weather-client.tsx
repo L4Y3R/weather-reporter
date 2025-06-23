@@ -19,8 +19,9 @@ export function WeatherClient() {
 
   const weatherGradients: Record<string, string> = {
     Clear: "bg-gradient-to-tr from-yellow-400 via-sky-800 to-sky-700",          
-    Sunny: "bg-gradient-to-tr from-yellow-800 via-orange-700 to-amber-600",    
-    Cloudy: "bg-gradient-to-tr from-gray-800 via-gray-700 to-gray-600",       
+    Sunny: "bg-gradient-to-tr from-yellow-600 via-orange-600 to-amber-300",    
+    Cloudy: "bg-gradient-to-tr from-gray-800 via-gray-700 to-gray-600",
+    Overcast: "bg-gradient-to-tr from-gray-800 via-gray-700 to-gray-600",    
     Rain: "bg-gradient-to-tr from-blue-950 via-gray-800 to-gray-700",
     Drizzle: "bg-gradient-to-tr from-blue-950 via-gray-800 to-gray-700",        
     Thunderstorm: "bg-gradient-to-tr from-gray-900 via-slate-800 to-slate-700", 
@@ -116,7 +117,7 @@ export function WeatherClient() {
   const backgroundClass =
     Object.entries(weatherGradients).find(([key]) =>
       condition.toLowerCase().includes(key.toLowerCase())
-    )?.[1] || "bg-gradient-to-tr from-blue-900 via-cyan-700 to-blue-500";
+    )?.[1] || "bg-gradient-to-tr from-blue-950 via-gray-800 to-gray-700";
 
   return (
   <main className={`min-h-screen transition-colors duration-1000 ${backgroundClass}`}>
