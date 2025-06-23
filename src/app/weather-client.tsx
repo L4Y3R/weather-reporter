@@ -17,25 +17,75 @@ export function WeatherClient() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  const fetchWeatherData = async (url: string) => {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Failed to fetch weather");
+
+      const data: WeatherData = await res.json();
+      setWeather(data);
+      setError(false);
+    } catch (e) {
+      console.error(e);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        const res = await fetch(`/api/weather?city=${city}`);
-        if (!res.ok) throw new Error("Failed to fetch weather");
-
-        const data: WeatherData = await res.json();
-        console.log(" Data: ", data.forecast);
-        setWeather(data);
-      } catch (e) {
-        console.error(e);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchWeather();
+    setLoading(true);
+    fetchWeatherData(`/api/weather?city=${city}`);
   }, [city]);
+
+  const handleDetectLocation = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser");
+      return;
+    }
+
+    setLoading(true);
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+      alert("Location detection timed out. Please try again or enter your city manually.");
+    }, 10000);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        clearTimeout(timeoutId);
+        const { latitude, longitude } = position.coords;
+        fetchWeatherData(`/api/weather?lat=${latitude}&lon=${longitude}`);
+      },
+      (positionError) => {
+        clearTimeout(timeoutId);
+        let errorMessage = "Unable to retrieve your location: ";
+        
+        switch (positionError.code) {
+          case positionError.PERMISSION_DENIED:
+            errorMessage += "Location access was denied. Please enable location permissions and try again.";
+            break;
+          case positionError.POSITION_UNAVAILABLE:
+            errorMessage += "Location information is unavailable. Please check your internet connection.";
+            break;
+          case positionError.TIMEOUT:
+            errorMessage += "Location request timed out. Please try again.";
+            break;
+          default:
+            errorMessage += positionError.message;
+            break;
+        }
+        
+        alert(errorMessage);
+        console.error("Geolocation error:", positionError);
+        setLoading(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 8000,
+        maximumAge: 300000
+      }
+    );
+  };
 
   if (loading) {
     return (
@@ -53,7 +103,10 @@ export function WeatherClient() {
   <main className="min-h-screen bg-black">
       <div className="w-full mx-auto px-4 sm:px-8 md:px-12 lg:px-20 xl:px-32 2xl:px-52 py-8">
         <div className="py-8">
-            <HeaderSearch onSearch={(value) => setCity(value)}/>
+            <HeaderSearch 
+            onSearch={(value) => setCity(value)}
+            onDetectLocation={handleDetectLocation}
+            />
         </div>
 
         <CurrentWeather weather={weather}/>

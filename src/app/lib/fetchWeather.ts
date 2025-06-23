@@ -1,13 +1,11 @@
 import { WeatherData } from "../types/weather";
 
-export async function fetchWeather(city: string): Promise<WeatherData | null> {
+export async function fetchWeather(locationQuery: string): Promise<WeatherData | null> {
   try {
     const apiKey = process.env.WEATHER_API_KEY;
-    const response = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3`,
-      {
-        next: { revalidate: 600 },
-      }
+     const response = await fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(locationQuery)}&days=3`,
+      { next: { revalidate: 600 } }
     );
     if (!response.ok) {
       console.error("Failed to fetch weather:", response.statusText);
