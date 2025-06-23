@@ -17,6 +17,17 @@ export function WeatherClient() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  const weatherGradients: Record<string, string> = {
+    Clear: "bg-gradient-to-tr from-sky-900 via-sky-800 to-sky-700",          
+    Sunny: "bg-gradient-to-tr from-yellow-800 via-orange-700 to-amber-600",    
+    Cloudy: "bg-gradient-to-tr from-gray-800 via-gray-700 to-gray-600",       
+    Rain: "bg-gradient-to-tr from-blue-950 via-gray-800 to-gray-700",           
+    Thunderstorm: "bg-gradient-to-tr from-gray-900 via-slate-800 to-slate-700", 
+    Snow: "bg-gradient-to-tr from-gray-700 via-gray-600 to-gray-500",         
+    Mist: "bg-gradient-to-tr from-slate-600 via-slate-500 to-slate-400",       
+    Fog: "bg-gradient-to-tr from-slate-700 via-slate-600 to-slate-500",       
+  };
+
   const fetchWeatherData = async (url: string) => {
     try {
       const res = await fetch(url);
@@ -99,8 +110,15 @@ export function WeatherClient() {
     );
   }
 
+  const condition = weather.conditionText || "Clear";
+
+  const backgroundClass =
+    Object.entries(weatherGradients).find(([key]) =>
+      condition.toLowerCase().includes(key.toLowerCase())
+    )?.[1] || "bg-gradient-to-tr from-blue-900 via-cyan-700 to-blue-500";
+
   return (
-  <main className="min-h-screen bg-black">
+  <main className={`min-h-screen transition-colors duration-1000 ${backgroundClass}`}>
       <div className="w-full mx-auto px-4 sm:px-8 md:px-12 lg:px-20 xl:px-32 2xl:px-52 py-8">
         <div className="py-8">
             <HeaderSearch 
