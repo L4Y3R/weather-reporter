@@ -18,7 +18,7 @@ export function WeatherClient() {
   const [error, setError] = useState(false);
 
   const weatherGradients: Record<string, string> = {
-    Clear: "bg-gradient-to-tr from-sky-900 via-sky-800 to-sky-700",          
+    Clear: "bg-gradient-to-tr from-yellow-400 via-sky-800 to-sky-700",          
     Sunny: "bg-gradient-to-tr from-yellow-800 via-orange-700 to-amber-600",    
     Cloudy: "bg-gradient-to-tr from-gray-800 via-gray-700 to-gray-600",       
     Rain: "bg-gradient-to-tr from-blue-950 via-gray-800 to-gray-700",           
